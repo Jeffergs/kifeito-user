@@ -19,18 +19,17 @@ Na versão 1, o serviço utiliza **Spring Security**, **JWT**, **BCrypt** e **St
 5. [🪪 Identidade do usuário](#-identidade-do-usuário)
 6. [🔎 Consultar própria conta](#-consultar-própria-conta)
 7. [✏️ Atualizar própria conta](#️-atualizar-própria-conta)
-8. [📧 Alterar e-mail](#-alterar-e-mail)
 9. [🗑️ Excluir própria conta](#️-excluir-própria-conta)
-10. [🔒 Segurança](#-segurança)
-11. [🛡️ Autorização](#️-autorização)
-12. [📨 Integração com Tasks](#-integração-com-tasks)
-13. [🛠️ Tecnologias](#️-tecnologias)
-14. [📁 Estrutura](#-estrutura)
-15. [⚙️ Configuração](#️-configuração)
-16. [🐳 Docker](#-docker)
-17. [🧪 Testes](#-testes)
-18. [🚫 Fora do escopo da versão 1](#-fora-do-escopo-da-versão-1)
-19. [📄 Licença](#-licença)
+9. [🔒 Segurança](#-segurança)
+10. [🛡️ Autorização](#️-autorização)
+11. [📨 Integração com Tasks](#-integração-com-tasks)
+12. [🛠️ Tecnologias](#️-tecnologias)
+13. [📁 Estrutura](#-estrutura)
+14. [⚙️ Configuração](#️-configuração)
+15. [🐳 Docker](#-docker)
+16. [🧪 Testes](#-testes)
+17. [🚫 Fora do escopo da versão 1](#-fora-do-escopo-da-versão-1)
+18. [📄 Licença](#-licença)
 
 ---
 
@@ -233,6 +232,8 @@ dados da própria conta
 
 # ✏️ Atualizar própria conta
 
+**PUT /usuario**
+
 O usuário autenticado pode atualizar os dados permitidos da própria conta.
 
 Na versão 1, podem ser alterados:
@@ -253,7 +254,9 @@ userId
   ↓
 User correspondente
   ↓
-validação
+validação dos dados
+  ↓
+verifica unicidade do email
   ↓
 atualização
   ↓
@@ -266,53 +269,39 @@ persistência
 - A identidade do usuário é obtida através do JWT;
 - O usuário não pode alterar o `id`;
 - O usuário não pode alterar a identidade de outro usuário;
-- O alteração de senha não faz parte desta operação.
-
-⬆️ [Voltar ao índice](#indice)
-
----
-
-<a id="alterar-e-mail"></a>
-
-# 📧 Alterar e-mail
-
-O usuário pode alterar o próprio e-mail somente quando estiver autenticado.
-
-### Regras
-
-- O usuário deve estar autenticado;
-- O novo e-mail deve possuir formato válido;
-- O novo e-mail não pode pertencer a outro usuário;
-- Se o novo e-mail for igual ao atual, nenhuma alteração é necessária;
-- O novo e-mail será utilizado nos próximos logins;
+- O name pode ser alterado;
+- O email pode ser alterado;
+- O novo email deve possuir formato válido;
+- O novo email não pode pertencer a outro usuário;
+- Se o novo email for igual ao atual, nenhuma alteração é necessária;
 - A alteração do e-mail não altera a identidade do usuário;
-- O `userId` permanece o mesmo após a alteração.
+- O userId permanece o mesmo após a alteração;
+- A alteração de senha não faz parte desta operação.
 
-### Exemplo
+### Exemplo:
 
 ```text
 Antes:
-
 userId = 42
+name   = João
 email  = usuario@email.com
 
-
 Depois:
-
 userId = 42
+name   = João Silva
 email  = novo@email.com
 ```
-
 A identidade continua sendo:
 
 ```text
 userId = 42
 ```
 
+O novo e-mail será utilizado nos próximos logins.
+
 ⬆️ [Voltar ao índice](#indice)
 
 ---
-
 <a id="excluir-própria-conta"></a>
 
 # 🗑️ Excluir própria conta
@@ -343,7 +332,7 @@ O cliente não deve informar outro usuário para determinar qual conta será exc
 
 - Apenas o próprio usuário pode excluir sua conta;
 - A identidade é obtida através do JWT;
-- A exclusão é definitiva na V1;
+- A exclusão é definitiva na versão 1;
 - Após a exclusão, a conta não poderá ser recuperada;
 - As tarefas pertencentes ao usuário também deverão ser excluídas;
 - O User não acessa diretamente o banco de dados do Tasks;
