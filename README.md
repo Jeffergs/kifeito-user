@@ -90,7 +90,7 @@ O `id` representa a identidade do usuário dentro do sistema e não deve ser alt
 
 O usuário pode criar uma nova conta.
 
-**POST /usuario**
+**POST /user**
 
 ### Fluxo
 
@@ -132,7 +132,7 @@ persiste User
 
 O usuário pode autenticar utilizando e-mail e senha.
 
-**POST /usuario/login**
+**POST /user/login**
 
 ### Fluxo
 
@@ -201,7 +201,7 @@ subject = 42
 
 O usuário autenticado pode consultar os dados da própria conta.
 
-**GET /usuario**
+**GET /user**
 
 A identificação do usuário deve vir da autenticação.
 
@@ -232,7 +232,7 @@ dados da própria conta
 
 # ✏️ Atualizar própria conta
 
-**PUT /usuario**
+**PUT /user**
 
 O usuário autenticado pode atualizar os dados permitidos da própria conta.
 
@@ -308,7 +308,7 @@ O novo e-mail será utilizado nos próximos logins.
 
 O usuário pode excluir sua própria conta.
 
-**DELETE /usuario**
+**DELETE /user**
 
 ### Fluxo
 
