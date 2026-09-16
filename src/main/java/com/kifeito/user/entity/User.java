@@ -1,4 +1,4 @@
-package com.kifeito.user.Entity;
+package com.kifeito.user.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

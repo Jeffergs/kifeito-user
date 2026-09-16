@@ -1,6 +1,6 @@
-package com.kifeito.user.Repository;
+package com.kifeito.user.repository;
 
-import com.kifeito.user.Entity.User;
+import com.kifeito.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
